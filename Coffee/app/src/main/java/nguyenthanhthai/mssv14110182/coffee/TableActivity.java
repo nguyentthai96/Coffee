@@ -41,29 +41,29 @@ public class TableActivity extends AppCompatActivity {
 
     private void addControls() {
 
-        Spinner spinner = (Spinner) findViewById(R.id.spinner);
-        spinner.setAdapter(new ArrayAdapter<TableCafe>(this, android.R.layout.simple_spinner_item, TableCafe.selectAll()));
+//        Spinner spinner = (Spinner) findViewById(R.id.spinner);
+//        spinner.setAdapter(new ArrayAdapter<TableCafe>(this, android.R.layout.simple_spinner_item, TableCafe.selectAll()));
 
         //Type Product
-        RecyclerView recyclerViewProductType = (RecyclerView)findViewById(R.id.recyclerviewtype);
+        RecyclerView recyclerViewProductType = (RecyclerView) findViewById(R.id.recyclerviewtype);
         recyclerViewProductType.setLayoutManager(new GridLayoutManager(this, 2, GridLayoutManager.VERTICAL, false));
         recyclerViewProductType.setItemAnimator(new DefaultItemAnimator());
         mAdapterHeader = new ProductTypeRecyclerViewAdapter(ProductType.getAll());
         recyclerViewProductType.setAdapter(mAdapterHeader);
 
 
-
         recyclerViewProduct = (RecyclerView) findViewById(R.id.recyclerviewproduct);
-        products=Product.selectAll();
+        products = Product.selectAll();
         mAdapterProduct = new ProductRecyclerViewAdapter(products);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
         recyclerViewProduct.setLayoutManager(mLayoutManager);
         recyclerViewProduct.setItemAnimator(new DefaultItemAnimator());
         recyclerViewProduct.setAdapter(mAdapterProduct);
+
         RecyclerViewHeader recyclerViewHeader = (RecyclerViewHeader) findViewById(R.id.header);
         recyclerViewHeader.attachToRecyclerView(recyclerViewProduct);
-        if (products!=null){
-            if (products.size()>0){
+        if (products != null) {
+            if (products.size() > 0) {
                 recyclerViewProduct.setVisibility(View.VISIBLE);
             }
         }
@@ -73,10 +73,34 @@ public class TableActivity extends AppCompatActivity {
         mAdapterHeader.setOnClickItem(new ProductTypeRecyclerViewListenner() {
             @Override
             public void onClickProductType(ProductType productType) {
-                Intent intent=new Intent(TableActivity.this,ProductSelectActivity.class);
-                intent.putExtra("ProductTypeId",productType.getId());
-                startActivity(intent);
+                Intent intent = new Intent(TableActivity.this, ProductSelectActivity.class);
+                intent.putExtra("ProductTypeId", productType.getId());
+                startActivityForResult(intent, 12);
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 12&& resultCode==32) {
+            Long idNewProduct = data.getLongExtra("ProductId", 0);
+            Long count = data.getLongExtra("CountProduct", 0);
+            addProductToOrder(idNewProduct, count);
+        }
+    }
+
+    private void addProductToOrder(final Long idNewProduct, Long count) {
+        for (Product product : products) {
+            if(product.getId().equals(idNewProduct)){
+                product.setCount(product.getCount()==null?count:product.getCount()+count);
+                mAdapterProduct.notifyDataSetChanged();
+                return;
+            }
+        }
+        Product product=Product.findById(Product.class,idNewProduct);
+        product.setCount(count);
+        products.add(product);
+        mAdapterProduct.notifyDataSetChanged();
     }
 }

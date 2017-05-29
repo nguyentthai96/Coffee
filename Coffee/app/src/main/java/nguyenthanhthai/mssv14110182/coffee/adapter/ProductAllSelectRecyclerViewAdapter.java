@@ -20,7 +20,7 @@ public class ProductAllSelectRecyclerViewAdapter extends RecyclerView.Adapter<Pr
 
     List<Product> products;
 
-    public ProductAllSelectRecyclerViewAdapter(List<Product > products) {
+    public ProductAllSelectRecyclerViewAdapter(List<Product> products) {
         this.products = products;
     }
 
@@ -33,17 +33,31 @@ public class ProductAllSelectRecyclerViewAdapter extends RecyclerView.Adapter<Pr
     }
 
     @Override
-    public void onBindViewHolder(ProductAllSelectViewHolder holder, int position) {
-            holder.setValueItemName(products.get(position));
-
+    public void onBindViewHolder(final ProductAllSelectViewHolder holder, final int position) {
+        holder.setValueItemName(products.get(position));
+        holder.getOrder().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                orderListenner.onClickOrder(products.get(position),holder.getCountNumber());
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
-        if(products==null)
-        {
+        if (products == null) {
             return 0;
         }
         return products.size();
+    }
+
+    OrderListenner orderListenner;
+
+    public void setOnClickOrderProduct(OrderListenner orderListenner) {
+        this.orderListenner = orderListenner;
+    }
+
+    public interface OrderListenner {
+        void onClickOrder(Product product, Long numberCount);
     }
 }

@@ -14,15 +14,13 @@ public class ProductType extends SugarRecord {
 
     String nameProductType;
     String image;
-    List<Product> products;
 
     public ProductType() {
     }
 
-    public ProductType(String nameProductType, String image, List<Product> products) {
+    public ProductType(String nameProductType, String image) {
         this.nameProductType = nameProductType;
         this.image = image;
-        this.products = products;
     }
 
     public String getNameProductType() {
@@ -53,56 +51,32 @@ public class ProductType extends SugarRecord {
         } catch (Exception e) {
 
         }
-        List<Product> products = new ArrayList<>();
-        Product product = new Product("Cafe hạt", "cafe", 12D, "Ly");
-        product.save();
-        products.add(product);
-        product = new Product("Cafe hạt", "cafe", 12D, "Ly");
-        product.save();
-        products.add(product);
-        product = new Product("Cafe hạt", "cafe", 12D, "Ly");
-        product.save();
-        products.add(product);
-        ProductType productType = new ProductType("Cafe", "cafe", products);
+        ProductType productType = new ProductType("Cafe", "cafe");
         productType.save();
+        Product product = new Product("Cafe hạt1", "cafe", 12D, "Ly",productType);
+        product.save();
+        product = new Product("Cafe hạt2", "cafe", 12D, "Ly",productType);
+        product.save();
 
-        products = new ArrayList<>();
-        product = new Product("Cafe hạt", "cafe", 12D, "Ly");
-        product.save();
-        products.add(product);
-        product = new Product("Cafe hạt", "cafe", 12D, "Ly");
-        product.save();
-        products.add(product);
-        product = new Product("Cafe hạt", "cafe", 12D, "Ly");
-        product.save();
-        products.add(product);
-        productType = new ProductType("sinh tố", "sinhto", products);
+        productType = new ProductType("sinh tố", "sinhto");
         productType.save();
+        product = new Product("Cafe hạt3", "cafe", 12D, "Ly",productType);
+        product.save();
+        product = new Product("Cafe hạt4", "cafe", 12D, "Ly",productType);
+        product.save();
 
-        products = new ArrayList<>();
-        product = new Product("Cafe hạt", "cafe", 12D, "Ly");
-        product.save();
-        products.add(product);
-        product = new Product("Cafe hạt", "cafe", 12D, "Ly");
-        product.save();
-        products.add(product);
-        product = new Product("Cafe hạt", "cafe", 12D, "Ly");
-        product.save();
-        products.add(product);
-        productType = new ProductType("trà sữa", "trasua", products);
+        productType = new ProductType("trà sữa", "trasua");
         productType.save();
+        product = new Product("Cafe hạt5", "cafe", 12D, "Ly",productType);
+        product.save();
+        product = new Product("Cafe hạt6", "cafe", 12D, "Ly",productType);
+        product.save();
 
-        products = new ArrayList<>();
-        product = new Product("Cafe hạt", "cafe", 12D, "Ly");
-        product.save();
-        products.add(product);
-        product = new Product("Cafe hạt", "cafe", 12D, "Ly");
-        product.save();
-        products.add(product);
-        product = new Product("Cafe hạt", "cafe", 12D, "Ly");
-        product.save();
-        products.add(product);
-        productType = new ProductType("nước ép", "nuocep", products);
+        productType = new ProductType("nước ép", "nuocep");
         productType.save();
+        product = new Product("Cafe hạt7", "cafe", 12D, "Ly",productType);
+        product.save();
+        product = new Product("Cafe hạt8", "cafe", 12D, "Ly",productType);
+        product.save();
     }
 }

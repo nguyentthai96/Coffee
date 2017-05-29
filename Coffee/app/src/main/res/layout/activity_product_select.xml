@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,18 +7,20 @@
     tools:context="nguyenthanhthai.mssv14110182.coffee.ProductSelectActivity">
 
     <TextView
-        android:layout_width="368dp"
+        android:id="@+id/textlable"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="List Product All Order"
+        android:text="List Product of "
         android:textAlignment="center"
         android:textColor="@color/colorPrimary"
-        android:textSize="30sp"
+        android:textSize="27sp"
         android:textStyle="bold"
-        tools:layout_editor_absoluteY="0dp"
-        tools:layout_editor_absoluteX="8dp" />
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp" />
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerviewproduct"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        />
-</android.support.constraint.ConstraintLayout>
+        android:layout_below="@id/textlable"/>
+</RelativeLayout>

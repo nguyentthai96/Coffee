@@ -21,28 +21,51 @@ public class ProductRecyclerViewAdapter extends RecyclerView.Adapter<ProductView
 
     List<Product> products;
 
-    public ProductRecyclerViewAdapter(List<Product > products) {
+    public ProductRecyclerViewAdapter(List<Product> products) {
         this.products = products;
     }
 
     @Override
     public ProductViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.product_type_item, parent, false);
+                .inflate(R.layout.product_item, parent, false);
 
         return new ProductViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(ProductViewHolder holder, int position) {
-            holder.setValueItemName(products.get(position));
+    public void onBindViewHolder(final ProductViewHolder holder, final int position) {
+        holder.setValueItemName(products.get(position));
 
+        holder.getRemove().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                products.remove(position);
+                notifyItemRemoved(position);
+                notifyItemRangeChanged(position, products.size());
+            }
+        });
+
+        holder.getAdd().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                products.get(position).setCount((products.get(position).getCount()==null)?1:products.get(position).getCount()+1);
+                holder.getCount().setText(products.get(position).getCount().toString());
+            }
+        });
+
+        holder.getSub().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                products.get(position).setCount((products.get(position).getCount()==null)?1:products.get(position).getCount()-1);
+                holder.getCount().setText(products.get(position).getCount().toString());
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
-        if(products==null)
-        {
+        if (products == null) {
             return 0;
         }
         return products.size();

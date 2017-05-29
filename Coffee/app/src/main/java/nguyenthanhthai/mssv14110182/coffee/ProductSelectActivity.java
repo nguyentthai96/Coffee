@@ -7,6 +7,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.TextView;
 
 import java.util.List;
 
@@ -22,7 +23,7 @@ public class ProductSelectActivity extends AppCompatActivity {
     private List<Product> products;
     private RecyclerView recyclerViewProduct;
     private ProductAllSelectRecyclerViewAdapter mAdapterProduct;
-
+    Intent intent;
     Long productTypeId;
 
     @Override
@@ -30,20 +31,33 @@ public class ProductSelectActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_select);
 
+        intent = getIntent();
+        productTypeId = intent.getLongExtra("ProductTypeId", 0);
         addControls();
     }
 
     private void addControls() {
+
+        TextView texLable= ((TextView)findViewById(R.id.textlable));
+        texLable.setText(texLable.getText()+" "+ProductType.findById(ProductType.class,productTypeId).getNameProductType());
+
         recyclerViewProduct = (RecyclerView) findViewById(R.id.recyclerviewproduct);
-        Intent intent=getIntent();
-        productTypeId= intent.getLongExtra("ProductTypeId", 0);
-        products=Product.selectFilter(productTypeId);
+        products = Product.selectFilter(productTypeId);
         mAdapterProduct = new ProductAllSelectRecyclerViewAdapter(products);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
         recyclerViewProduct.setLayoutManager(mLayoutManager);
         recyclerViewProduct.setItemAnimator(new DefaultItemAnimator());
         recyclerViewProduct.setAdapter(mAdapterProduct);
-        RecyclerViewHeader recyclerViewHeader = (RecyclerViewHeader) findViewById(R.id.header);
-        recyclerViewHeader.attachToRecyclerView(recyclerViewProduct);
+
+
+        mAdapterProduct.setOnClickOrderProduct(new ProductAllSelectRecyclerViewAdapter.OrderListenner() {
+            @Override
+            public void onClickOrder(Product product, Long count) {
+                intent.putExtra("ProductId",product.getId());
+                intent.putExtra("CountProduct",count);
+                setResult(32, intent);
+                finish();
+            }
+        });
     }
 }
