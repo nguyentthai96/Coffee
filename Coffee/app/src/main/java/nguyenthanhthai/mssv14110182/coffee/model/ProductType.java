@@ -60,23 +60,23 @@ public class ProductType extends SugarRecord {
 
         productType = new ProductType("sinh tố", "sinhto");
         productType.save();
-        product = new Product("Cafe hạt3", "cafe", 12D, "Ly",productType);
+        product = new Product("sinh tố3", "cafe", 12D, "Ly",productType);
         product.save();
-        product = new Product("Cafe hạt4", "cafe", 12D, "Ly",productType);
+        product = new Product("sinh tố4", "cafe", 12D, "Ly",productType);
         product.save();
 
         productType = new ProductType("trà sữa", "trasua");
         productType.save();
-        product = new Product("Cafe hạt5", "cafe", 12D, "Ly",productType);
+        product = new Product("trà sữa5", "cafe", 12D, "Ly",productType);
         product.save();
-        product = new Product("Cafe hạt6", "cafe", 12D, "Ly",productType);
+        product = new Product("trà sữa6", "cafe", 12D, "Ly",productType);
         product.save();
 
         productType = new ProductType("nước ép", "nuocep");
         productType.save();
-        product = new Product("Cafe hạt7", "cafe", 12D, "Ly",productType);
+        product = new Product("nước ép7", "cafe", 12D, "Ly",productType);
         product.save();
-        product = new Product("Cafe hạt8", "cafe", 12D, "Ly",productType);
+        product = new Product("nước ép8", "cafe", 12D, "Ly",productType);
         product.save();
     }
 }

@@ -13,18 +13,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <meta-data
-            android:name="DATABASE"
-            android:value="aaaaaaaa" />
-        <meta-data
-            android:name="VERSION"
-            android:value="8" />
-        <meta-data
-            android:name="QUERY_LOG"
-            android:value="true" />
-        <meta-data
-            android:name="DOMAIN_PACKAGE_NAME"
-            android:value="nguyenthanhthai.mssv14110182.coffee.model" />
+        <!--<meta-data-->
+            <!--android:name="DATABASE"-->
+            <!--android:value="coffee" />-->
+        <!--<meta-data-->
+            <!--android:name="VERSION"-->
+            <!--android:value="15" />-->
+        <!--<meta-data-->
+            <!--android:name="QUERY_LOG"-->
+            <!--android:value="true" />-->
+        <!--<meta-data-->
+            <!--android:name="DOMAIN_PACKAGE_NAME"-->
+            <!--android:value="nguyenthanhthai.mssv14110182.coffee.model" />-->
 
         <activity android:name=".MainActivity">
             <intent-filter>
